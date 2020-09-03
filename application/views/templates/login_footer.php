@@ -1,7 +1,7 @@
 </div>
 
 <!-- Footer -->
-<footer class="sticky-footer bg-primary fixed-bottom">
+<footer class="sticky-footer bg-primary <?= $fixedFooter; ?>">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span class="text-light">Copyright &copy; Private Coding 2020</span>
