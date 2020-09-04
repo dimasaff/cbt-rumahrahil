@@ -10,12 +10,10 @@
         </div>
     </div>
 
-    <div class="card mb-3 col-lg-">
+    <div class="card mb-3 col-lg">
         <div class="row no-gutters">
-            <div class="col-md-4">
 
-            </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card-body">
                     <h5 class="card-title"><?= $user['nama']; ?></h5>
                     <p class="card-text"><?= $user['email']; ?></p>
