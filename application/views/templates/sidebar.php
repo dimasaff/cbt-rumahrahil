@@ -55,7 +55,7 @@
         Data Soal dan Kunci Jawaban
     </div>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="<?= base_url('Soal'); ?>">
             <i class="fas fa-book"></i>
             <span>Soal</span>
         </a>
@@ -66,12 +66,12 @@
             <span>Jawaban</span>
         </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#">
             <i class="fas fa-book"></i>
             <span>Kunci Jawaban</span>
         </a>
-    </li>
+    </li> -->
     <div class="sidebar-heading">
         Data Nilai Siswa
     </div>
