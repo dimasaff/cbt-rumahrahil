@@ -14,35 +14,33 @@
         <div class="row no-gutters justify-content-center">
             <div class="col-md-12 ">
                 <div class="card-body">
-                    <h1 class="text-center">Soal</h1>
+                    <h1 class="text-center">Jawaban</h1>
                     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#createModal">Tambah data</a>
                     <table class="table table-hover">
                         <thead class="bg-primary text-light">
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Nama Subtema</th>
-                                <th scope="col">Jawaban Benar</th>
-                                <th scope="col">Kelas</th>
-                                <th scope="col">Soal Text</th>
-                                <th scope="col">Soal Gambar</th>
-                                <th scope="col">Soal Suara</th>
+                                <th scope="col">Soal</th>
+                                <th scope="col">Option A</th>
+                                <th scope="col">Option B</th>
+                                <th scope="col">Option C</th>
+                                <th scope="col">Option D</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
-                            <?php foreach ($soal as $s) : ?>
+                            <?php foreach ($jawaban as $s) : ?>
                                 <tr>
                                     <th scope="row"><?= $i; ?></th>
-                                    <td><?= $s['nama_subtema']; ?></td>
-                                    <td><?= $s['jawaban_benar']; ?></td>
-                                    <td><?= $s['nama_tingkat'] ?></td>
                                     <td><?= $s['soal']; ?></td>
-                                    <td><?= $s['soal_gambar']; ?></td>
-                                    <td><?= $s['soal_suara']; ?></td>
+                                    <td><?= $s['option_a']; ?></td>
+                                    <td><?= $s['option_b']; ?></td>
+                                    <td><?= $s['option_c']; ?></td>
+                                    <td><?= $s['option_d']; ?></td>
                                     <td>
-                                        <a href="" class="badge badge-pill badge-success" data-toggle="modal" data-target="#updateModal<?= $s['id_soal']; ?>">Update</a>
-                                        <a href="" class="badge badge-pill badge-danger" data-toggle="modal" data-target="#deleteModal<?= $s['id_soal']; ?>">Delete</a>
+                                        <a href="" class="badge badge-pill badge-success" data-toggle="modal" data-target="#updateModal<?= $s['id_jawaban']; ?>">Update</a>
+                                        <a href="" class="badge badge-pill badge-danger" data-toggle="modal" data-target="#deleteModal<?= $s['id_jawaban']; ?>">Delete</a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
@@ -64,63 +62,52 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">Input Soal</h5>
+                <h5 class="modal-title" id="createModalLabel">Input Option Jawaban</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="needs-validation" method="POST" action="<?= base_url('soal') ?>" novalidate>
+                <form class="needs-validation" method="POST" action="<?= base_url('soal/jawaban') ?>" novalidate>
                     <div class="form-group">
-                        <label for="inputSubtema">Subtema</label>
-                        <select id="inputSubtema" class="form-control" name="subtema" required>
+                        <label for="inputSoal">Soal</label>
+                        <select id="inputSoal" class="form-control" name="soal" required>
                             <option selected value="">Pilih..</option>
-                            <?php foreach ($subtema as $su) : ?>
-                                <option value="<?= $su['id_subtema']; ?>"><?= $su['nama_subtema']; ?></option>
+                            <?php foreach ($soal as $su) : ?>
+                                <option value="<?= $su['id_soal']; ?>"><?= $su['soal']; ?> </option>
                             <?php endforeach; ?>
                         </select>
                         <div class="invalid-feedback">
-                            Tolong Pilih Salah Satu subtema
+                            Tolong Pilih Salah Satu Soal
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputAnswer">Jawaban Benar</label>
-                        <select id="inputAnswer" class="form-control" name="answer" required>
-                            <option selected value="">Pilih..</option>
-                            <?php foreach ($jawabanBenar as $t) : ?>
-                                <option value="<?= $t['id_kunci_jawaban']; ?>"><?= $t['jawaban_benar']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <div class="invalid-feedback">
-                            Tolong Pilih Salah Satu jawaban benar
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputClass">Kelas</label>
-                        <select id="inputClass" class="form-control" name="class" required>
-                            <option selected value="">Pilih..</option>
-                            <?php foreach ($kelas as $k) : ?>
-                                <option value="<?= $k['id_tingkat']; ?>"><?= $k['nama_tingkat']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <div class="invalid-feedback">
-                            Tolong Pilih Salah Satu Kelas
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputQueation">Soal Text</label>
-                        <input type="text" class="form-control" id="exampleInputQueation" placeholder="Masukkan Soal" name="question" required>
+                        <label for="exampleInputOptionA">Option A</label>
+                        <input type="text" class="form-control" id="exampleInputOptionA" placeholder="Masukkan Option Jawaban A" name="option_a" required>
                         <div class="invalid-feedback">
                             Data Tidak Boleh Kosong
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputQueationPicture">Soal Gambar</label>
-                        <input type="text" class="form-control" id="exampleInputQueationPicture" placeholder="Masukkan Soal Gambar" name="questionPicture">
+                        <label for="exampleInputOptionB">Option B</label>
+                        <input type="text" class="form-control" id="exampleInputOptionB" placeholder="Masukkan Option Jawaban B" name="option_b" required>
+                        <div class="invalid-feedback">
+                            Data Tidak Boleh Kosong
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputQueationAudio">Soal Audio</label>
-                        <input type="text" class="form-control" id="exampleInputQueationAudio" placeholder="Masukkan Soal Gambar" name="questionAudio">
+                        <label for="exampleInputOptionC">Option C</label>
+                        <input type="text" class="form-control" id="exampleInputOptionC" placeholder="Masukkan Option Jawaban C" name="option_C" required>
+                        <div class="invalid-feedback">
+                            Data Tidak Boleh Kosong
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputOptionD">Option D</label>
+                        <input type="text" class="form-control" id="exampleInputOptionD" placeholder="Masukkan Option Jawaban D" name="option_d" required>
+                        <div class="invalid-feedback">
+                            Data Tidak Boleh Kosong
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -132,68 +119,64 @@
     </div>
 </div>
 <!-- Modal -->
-<?php foreach ($soal as $so) : ?>
-    <div class="modal fade" id="updateModal<?= $so['id_soal']; ?>" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel<?= $so['id_soal']; ?>" aria-hidden="true">
+<?php foreach ($jawaban as $so) : ?>
+    <div class="modal fade" id="updateModal<?= $so['id_jawaban']; ?>" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel<?= $so['id_jawaban']; ?>" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateModalLabel<?= $so['id_soal']; ?>">Update Data</h5>
+                    <h5 class="modal-title" id="updateModalLabel<?= $so['id_jawaban']; ?>">Update Data</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" method="POST" action="<?= base_url('soal/updateSoal/') . $so['id_soal']; ?>" novalidate>
+                    <form class="needs-validation" method="POST" action="<?= base_url('soal/updateJawaban/') . $so['id_jawaban']; ?>" novalidate>
                         <div class="form-group">
-                            <label for="inputSubtema">Subtema</label>
-                            <select id="inputSubtema" class="form-control" name="subtema" required>
-                                <option selected value="<?= $so['subtema_id']; ?>"><?= $so['nama_subtema']; ?></option>
-                                <?php foreach ($subtema as $su) : ?>
-                                    <option value="<?= $su['id_subtema']; ?>"><?= $su['nama_subtema']; ?></option>
+                            <label for="inputSoal">Soal</label>
+                            <select id="inputSoal" class="form-control" name="soal" required>
+                                <option selected value="<?= $so['soal_id']; ?>"><?= $so['soal']; ?> </option>
+                                <?php foreach ($soal as $s) : ?>
+                                    <option value="<?= $s['id_soal']; ?>"><?= $s['soal']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="invalid-feedback">
-                                Tolong Pilih Salah Satu subtema
+                                Tolong Pilih Salah Satu Soal
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputAnswer">Jawaban Benar</label>
-                            <select id="inputAnswer" class="form-control" name="answer" required>
-                                <option selected value="<?= $so['kunci_jawaban_id']; ?>"><?= $so['jawaban_benar']; ?></option>
-                                <?php foreach ($jawabanBenar as $t) : ?>
-                                    <option value="<?= $t['id_kunci_jawaban']; ?>"><?= $t['jawaban_benar']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <div class="invalid-feedback">
-                                Tolong Pilih Salah Satu jawaban benar
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputClass">Kelas</label>
-                            <select id="inputClass" class="form-control" name="class" required>
-                                <option selected value="<?= $so['tingkat_id']; ?>"><?= $so['nama_tingkat']; ?></option>
-                                <?php foreach ($kelas as $k) : ?>
-                                    <option value="<?= $k['id_tingkat']; ?>"><?= $k['nama_tingkat']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <div class="invalid-feedback">
-                                Tolong Pilih Salah Satu Kelas
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputQueation">Soal Text</label>
-                            <input type="text" class="form-control" id="exampleInputQueation" placeholder="Masukkan Soal" name="question" value="<?= $so['soal']; ?>" required>
+                            <label for="exampleInputOptionA">Option A</label>
+                            <input type="text" class="form-control" id="exampleInputOptionA" placeholder="Masukkan Option Jawaban A" name="option_a" value="<?= $so['option_a']; ?>" required>
                             <div class="invalid-feedback">
                                 Data Tidak Boleh Kosong
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputQueationPicture">Soal Gambar</label>
-                            <input type="text" class="form-control" id="exampleInputQueationPicture" placeholder="Masukkan Soal Gambar" name="questionPicture" value="<?= $so['soal_gambar']; ?>">
+                            <label for="exampleInputOptionB">Option B</label>
+                            <input type="text" class="form-control" id="exampleInputOptionB" placeholder="Masukkan Option Jawaban B" name="option_b" value="<?= $so['option_b']; ?>" required>
+                            <div class="invalid-feedback">
+                                Data Tidak Boleh Kosong
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputQueationAudio">Soal Audio</label>
-                            <input type="text" class="form-control" id="exampleInputQueationAudio" placeholder="Masukkan Soal Gambar" name="questionAudio" value="<?= $so['soal_suara']; ?>">
+                            <label for="exampleInputOptionC">Option C</label>
+                            <input type="text" class="form-control" id="exampleInputOptionC" placeholder="Masukkan Option Jawaban C" name="option_c" value="<?= $so['option_c']; ?>" required>
+                            <div class="invalid-feedback">
+                                Data Tidak Boleh Kosong
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputOptionC">Option D</label>
+                            <input type="text" class="form-control" id="exampleInputOptionC" placeholder="Masukkan Option Jawaban C" name="option_c" value="<?= $so['option_c']; ?>" required>
+                            <div class="invalid-feedback">
+                                Data Tidak Boleh Kosong
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputOptionD">Option C</label>
+                            <input type="text" class="form-control" id="exampleInputOptionD" placeholder="Masukkan Option Jawaban D" name="option_d" value="<?= $so['option_d']; ?>" required>
+                            <div class="invalid-feedback">
+                                Data Tidak Boleh Kosong
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
