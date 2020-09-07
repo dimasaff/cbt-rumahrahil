@@ -190,7 +190,7 @@
     <div class="modal fade" id="deleteModal<?= $tm['id_soal']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel<?= $tm['id_soal']; ?>" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" action="<?= base_url('soal/deleteSoal/') . $tm['id_soal']; ?>">
+                <form method="POST" action="<?= base_url('soal/deleteJawaban/') . $tm['id_soal']; ?>">
                     <div class="modal-header">
                         <h5 class="modal-title" id="deleteModalLabel<?= $tm['id_soal']; ?>">Hapus Data</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

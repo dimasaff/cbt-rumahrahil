@@ -79,12 +79,16 @@ class Login extends CI_Controller
         $user = $this->db->get_where('tb_user', ['email' => $email])->row_array();
         if ($user) {
             if (password_verify($password, $user['password'])) {
-                $data = [
-                    'email' => $user['email'],
-                    'role_id' => $user['role_id']
-                ];
-                $this->session->set_userdata($data);
-                redirect('dashboard');
+                if ($user['role_id'] == 1) {
+                    $data = [
+                        'email' => $user['email'],
+                        'role_id' => $user['role_id']
+                    ];
+                    $this->session->set_userdata($data);
+                    redirect('dashboard');
+                } else {
+                    echo "halaman siswa/guru (masih tahap pengambangan)";
+                }
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password anda salah</div>');
                 redirect('login');

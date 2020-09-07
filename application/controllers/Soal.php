@@ -93,4 +93,11 @@ class Soal extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Soal Berhasil di update</div>');
         redirect('Soal/jawaban');
     }
+    public function deleteJawaban($id)
+    {
+        $this->db->where('id_jawaban', $id);
+        $this->db->delete('tb_jawaban');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">soal Berhasil di delete</div>');
+        redirect('soal/jawaban');
+    }
 }
