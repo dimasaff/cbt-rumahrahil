@@ -16,6 +16,19 @@
                 <div class="card-body">
                     <h1 class="text-center">Soal</h1>
                     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#createModal">Tambah data</a>
+                    <span>
+                        <div class="col-md-5 mt-2 mb-2">
+                            <form action="<?= base_url('soal') ?>" method="post">
+                                <select id="sortTema" class="form-control" name="sortSubTema" required>
+                                    <option selected value="">Kelompokan berdasarkan subtema</option>..</option>
+                                    <?php foreach ($subtema as $t) : ?>
+                                        <option value="<?= $t['id_subtema']; ?>"><?= $t['nama_subtema']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <button class="btn btn-facebook" type="submit">Refresh</button>
+                            </form>
+                        </div>
+                    </span>
                     <table class="table table-hover">
                         <thead class="bg-primary text-light">
                             <tr>
@@ -38,7 +51,7 @@
                                     <td><?= $s['jawaban_benar']; ?></td>
                                     <td><?= $s['nama_tingkat'] ?></td>
                                     <td><?= $s['soal']; ?></td>
-                                    <td><?= $s['soal_gambar']; ?></td>
+                                    <td><img src="<?= base_url('assets/img/') . $s['soal_gambar']; ?>" alt="" width="100px" height="100px"></td>
                                     <td><?= $s['soal_suara']; ?></td>
                                     <td>
                                         <a href="" class="badge badge-pill badge-success" data-toggle="modal" data-target="#updateModal<?= $s['id_soal']; ?>">Update</a>
@@ -70,59 +83,62 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="needs-validation" method="POST" action="<?= base_url('soal') ?>" novalidate>
-                    <div class="form-group">
-                        <label for="inputSubtema">Subtema</label>
-                        <select id="inputSubtema" class="form-control" name="subtema" required>
-                            <option selected value="">Pilih..</option>
-                            <?php foreach ($subtema as $su) : ?>
-                                <option value="<?= $su['id_subtema']; ?>"><?= $su['nama_subtema']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <div class="invalid-feedback">
-                            Tolong Pilih Salah Satu subtema
-                        </div>
+                <?= form_open_multipart('soal'); ?>
+                <div class="form-group">
+                    <label for="inputSubtema">Subtema</label>
+                    <select id="inputSubtema" class="form-control" name="subtema" required>
+                        <option selected value="">Pilih..</option>
+                        <?php foreach ($subtema as $su) : ?>
+                            <option value="<?= $su['id_subtema']; ?>"><?= $su['nama_subtema']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="invalid-feedback">
+                        Tolong Pilih Salah Satu subtema
                     </div>
-                    <div class="form-group">
-                        <label for="inputAnswer">Jawaban Benar</label>
-                        <select id="inputAnswer" class="form-control" name="answer" required>
-                            <option selected value="">Pilih..</option>
-                            <?php foreach ($jawabanBenar as $t) : ?>
-                                <option value="<?= $t['id_kunci_jawaban']; ?>"><?= $t['jawaban_benar']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <div class="invalid-feedback">
-                            Tolong Pilih Salah Satu jawaban benar
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAnswer">Jawaban Benar</label>
+                    <select id="inputAnswer" class="form-control" name="answer" required>
+                        <option selected value="">Pilih..</option>
+                        <?php foreach ($jawabanBenar as $t) : ?>
+                            <option value="<?= $t['id_kunci_jawaban']; ?>"><?= $t['jawaban_benar']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="invalid-feedback">
+                        Tolong Pilih Salah Satu jawaban benar
                     </div>
-                    <div class="form-group">
-                        <label for="inputClass">Kelas</label>
-                        <select id="inputClass" class="form-control" name="class" required>
-                            <option selected value="">Pilih..</option>
-                            <?php foreach ($kelas as $k) : ?>
-                                <option value="<?= $k['id_tingkat']; ?>"><?= $k['nama_tingkat']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <div class="invalid-feedback">
-                            Tolong Pilih Salah Satu Kelas
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputClass">Kelas</label>
+                    <select id="inputClass" class="form-control" name="class" required>
+                        <option selected value="">Pilih..</option>
+                        <?php foreach ($kelas as $k) : ?>
+                            <option value="<?= $k['id_tingkat']; ?>"><?= $k['nama_tingkat']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="invalid-feedback">
+                        Tolong Pilih Salah Satu Kelas
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputQueation">Soal Text</label>
-                        <input type="text" class="form-control" id="exampleInputQueation" placeholder="Masukkan Soal" name="question" required>
-                        <div class="invalid-feedback">
-                            Data Tidak Boleh Kosong
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputQueation">Soal Text</label>
+                    <input type="text" class="form-control" id="exampleInputQueation" placeholder="Masukkan Soal" name="question" required>
+                    <div class="invalid-feedback">
+                        Data Tidak Boleh Kosong
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputQueationPicture">Soal Gambar</label>
-                        <input type="text" class="form-control" id="exampleInputQueationPicture" placeholder="Masukkan Soal Gambar" name="questionPicture">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputQueationPicture">Soal Gambar</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image" name="image">
+                        <label class="custom-file-label" for="image">Choose file</label>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputQueationAudio">Soal Audio</label>
-                        <input type="text" class="form-control" id="exampleInputQueationAudio" placeholder="Masukkan Soal Gambar" name="questionAudio">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputQueationAudio">Soal Audio</label>
+                    <input type="text" class="form-control" id="exampleInputQueationAudio" placeholder="Masukkan Soal Audio" name="questionAudio" disabled>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -143,59 +159,62 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" method="POST" action="<?= base_url('soal/updateSoal/') . $so['id_soal']; ?>" novalidate>
-                        <div class="form-group">
-                            <label for="inputSubtema">Subtema</label>
-                            <select id="inputSubtema" class="form-control" name="subtema" required>
-                                <option selected value="<?= $so['subtema_id']; ?>"><?= $so['nama_subtema']; ?></option>
-                                <?php foreach ($subtema as $su) : ?>
-                                    <option value="<?= $su['id_subtema']; ?>"><?= $su['nama_subtema']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <div class="invalid-feedback">
-                                Tolong Pilih Salah Satu subtema
-                            </div>
+                    <?= form_open_multipart('soal/updateSoal/' . $so['id_soal']); ?>
+                    <div class="form-group">
+                        <label for="inputSubtema">Subtema</label>
+                        <select id="inputSubtema" class="form-control" name="subtema" required>
+                            <option selected value="<?= $so['subtema_id']; ?>"><?= $so['nama_subtema']; ?></option>
+                            <?php foreach ($subtema as $su) : ?>
+                                <option value="<?= $su['id_subtema']; ?>"><?= $su['nama_subtema']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <div class="invalid-feedback">
+                            Tolong Pilih Salah Satu subtema
                         </div>
-                        <div class="form-group">
-                            <label for="inputAnswer">Jawaban Benar</label>
-                            <select id="inputAnswer" class="form-control" name="answer" required>
-                                <option selected value="<?= $so['kunci_jawaban_id']; ?>"><?= $so['jawaban_benar']; ?></option>
-                                <?php foreach ($jawabanBenar as $t) : ?>
-                                    <option value="<?= $t['id_kunci_jawaban']; ?>"><?= $t['jawaban_benar']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <div class="invalid-feedback">
-                                Tolong Pilih Salah Satu jawaban benar
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAnswer">Jawaban Benar</label>
+                        <select id="inputAnswer" class="form-control" name="answer" required>
+                            <option selected value="<?= $so['kunci_jawaban_id']; ?>"><?= $so['jawaban_benar']; ?></option>
+                            <?php foreach ($jawabanBenar as $t) : ?>
+                                <option value="<?= $t['id_kunci_jawaban']; ?>"><?= $t['jawaban_benar']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <div class="invalid-feedback">
+                            Tolong Pilih Salah Satu jawaban benar
                         </div>
-                        <div class="form-group">
-                            <label for="inputClass">Kelas</label>
-                            <select id="inputClass" class="form-control" name="class" required>
-                                <option selected value="<?= $so['tingkat_id']; ?>"><?= $so['nama_tingkat']; ?></option>
-                                <?php foreach ($kelas as $k) : ?>
-                                    <option value="<?= $k['id_tingkat']; ?>"><?= $k['nama_tingkat']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <div class="invalid-feedback">
-                                Tolong Pilih Salah Satu Kelas
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputClass">Kelas</label>
+                        <select id="inputClass" class="form-control" name="class" required>
+                            <option selected value="<?= $so['tingkat_id']; ?>"><?= $so['nama_tingkat']; ?></option>
+                            <?php foreach ($kelas as $k) : ?>
+                                <option value="<?= $k['id_tingkat']; ?>"><?= $k['nama_tingkat']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <div class="invalid-feedback">
+                            Tolong Pilih Salah Satu Kelas
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputQueation">Soal Text</label>
-                            <input type="text" class="form-control" id="exampleInputQueation" placeholder="Masukkan Soal" name="question" value="<?= $so['soal']; ?>" required>
-                            <div class="invalid-feedback">
-                                Data Tidak Boleh Kosong
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputQueation">Soal Text</label>
+                        <input type="text" class="form-control" id="exampleInputQueation" placeholder="Masukkan Soal" name="question" value="<?= $so['soal']; ?>" required>
+                        <div class="invalid-feedback">
+                            Data Tidak Boleh Kosong
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputQueationPicture">Soal Gambar</label>
-                            <input type="text" class="form-control" id="exampleInputQueationPicture" placeholder="Masukkan Soal Gambar" name="questionPicture" value="<?= $so['soal_gambar']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputQueationPicture">Soal Gambar</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="image" name="updateImage">
+                            <label class="custom-file-label" for="image"><?= $so['soal_gambar']; ?></label>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputQueationAudio">Soal Audio</label>
-                            <input type="text" class="form-control" id="exampleInputQueationAudio" placeholder="Masukkan Soal Gambar" name="questionAudio" value="<?= $so['soal_suara']; ?>">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputQueationAudio">Soal Audio</label>
+                        <input type="text" class="form-control" id="exampleInputQueationAudio" placeholder="Masukkan Soal Audio" name="questionAudio" value="<?= $so['soal_suara']; ?>" disabled>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
@@ -237,23 +256,3 @@
         background: #17D654;
     }
 </style>
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>

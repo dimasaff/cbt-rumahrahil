@@ -1,8 +1,18 @@
 <?php
+
+use phpDocumentor\Reflection\Types\This;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Theme extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        if (!$this->session->userdata('email')) {
+            redirect('login');
+        }
+    }
     public function index()
     {
         if ($this->input->post('classroom') == null) {
@@ -46,10 +56,15 @@ class Theme extends CI_Controller
     public function subTema()
     {
         if ($this->input->post('nameTheme') == null) {
+            if ($this->input->post('sortTema') == null) {
+                $id = 0;
+            } else {
+                $id = $this->input->post('sortTema');
+            }
             $data['user'] = $this->db->get_where('tb_user', ['email' => $this->session->userdata('email')])->row_array();
             $data['title'] = 'SubTema';
             $data['tema'] = $this->db->get('tb_tema')->result_array();
-            $data['subtema'] = $this->db->query('SELECT id_subtema, tema_id, nama_tema, nama_subtema FROM tb_subtema JOIN tb_tema ON tb_subtema.tema_id = tb_tema.id_tema')->result_array();
+            $data['subtema'] = $this->db->query("SELECT id_subtema, tema_id, nama_tema, nama_subtema FROM tb_subtema JOIN tb_tema ON tb_subtema.tema_id = tb_tema.id_tema WHERE tema_id = $id")->result_array();
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);

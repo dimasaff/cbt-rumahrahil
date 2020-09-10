@@ -16,6 +16,19 @@
                 <div class="card-body">
                     <h1 class="text-center">Jawaban</h1>
                     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#createModal">Tambah data</a>
+                    <span>
+                        <div class="col-md-5 mt-2 mb-2">
+                            <form action="<?= base_url('soal/jawaban') ?>" method="post">
+                                <select id="sortSubtema" class="form-control" name="sortSubtema" required>
+                                    <option selected value="">Kelompokan berdasarkan Subtema</option>..</option>
+                                    <?php foreach ($subtema as $t) : ?>
+                                        <option value="<?= $t['id_subtema']; ?>"><?= $t['nama_subtema']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <button class="btn btn-facebook" type="submit">Refresh</button>
+                            </form>
+                        </div>
+                    </span>
                     <table class="table table-hover">
                         <thead class="bg-primary text-light">
                             <tr>
@@ -220,23 +233,3 @@
         background: #17D654;
     }
 </style>
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>

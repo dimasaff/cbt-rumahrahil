@@ -3,8 +3,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Login extends CI_Controller
 {
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    //     if ($this->session->userdata('email')) {
+    //         redirect('dashboard');
+    //     }
+    // }
     public function index()
     {
+        if ($this->session->userdata('email')) {
+            redirect('dashboard');
+        }
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email', [
             'required' => 'Email wajib di isi'
         ]);
