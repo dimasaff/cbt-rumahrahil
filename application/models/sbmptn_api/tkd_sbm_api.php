@@ -1,8 +1,8 @@
 <?php
 
-class tkd_api extends CI_Model
+class tkd_sbm_api extends CI_Model
 {
-    public function getTKD($tkd = null)
+    public function getTKDsbm($tkd = null)
     {
         if ($tkd === null) {
             return $this->db->get('tb_tkd_sbmptn')->result_array();
