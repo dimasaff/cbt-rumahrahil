@@ -1,6 +1,6 @@
 <?php
 
-class soal_sbm_api extends CI_Model
+class soal_sbm_model extends CI_Model
 {
     public function getSoalsbm($soal = null)
     {

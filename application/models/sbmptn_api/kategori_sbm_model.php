@@ -1,6 +1,6 @@
 <?php
 
-class kategori_sbm_api extends CI_Model
+class kategori_sbm_model extends CI_Model
 {
     public function getKategorisbm($kategori = null)
     {

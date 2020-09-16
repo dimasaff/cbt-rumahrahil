@@ -1,6 +1,6 @@
 <?php
 
-class tkd_sbm_api extends CI_Model
+class tkd_sbm_model extends CI_Model
 {
     public function getTKDsbm($tkd = null)
     {

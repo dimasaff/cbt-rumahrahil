@@ -1,6 +1,6 @@
 <?php
 
-class jurusan_sbm_api extends CI_Model
+class jurusan_sbm_model extends CI_Model
 {
     public function getJurusansbm($jurusan = null)
     {

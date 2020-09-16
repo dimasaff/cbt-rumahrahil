@@ -1,6 +1,6 @@
 <?php
 
-class jawaban_sbm_api extends CI_Model
+class jawaban_sbm_model extends CI_Model
 {
     public function getJawabansbm($jawaban = null)
     {

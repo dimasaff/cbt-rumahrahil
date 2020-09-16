@@ -1,6 +1,6 @@
 <?php
 
-class kunci_sbm_api extends CI_Model
+class kunci_sbm_model extends CI_Model
 {
     public function getKuncisbm($kunci = null)
     {

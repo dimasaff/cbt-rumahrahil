@@ -1,6 +1,6 @@
 <?php
 
-class paket_sbm_api extends CI_Model
+class paket_sbm_model extends CI_Model
 {
     public function getPaketsbm($paket = null)
     {
