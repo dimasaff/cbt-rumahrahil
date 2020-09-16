@@ -48,12 +48,33 @@
             <!-- Custom scripts for all pages-->
             <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
             <script>
+                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                (function() {
+                    'use strict';
+                    window.addEventListener('load', function() {
+                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                        var forms = document.getElementsByClassName('needs-validation');
+                        // Loop over them and prevent submission
+                        var validation = Array.prototype.filter.call(forms, function(form) {
+                            form.addEventListener('submit', function(event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            }, false);
+                        });
+                    }, false);
+                })();
                 $(document).ready(function() {
                     $('.custom-file-input').on('change', function() {
                         let fileName = $(this).val().split('\\').pop();
                         $(this).next('.custom-file-label').addClass("selected").html(fileName);
                     });
-
+                    $('#sortKelas').on('change', function() {
+                        var a = $('#sortKelas').val();
+                        tema(a);
+                    });
                     //memancing combobox
                     $('#sortTema').on('change', function() {
                         var a = $('#sortTema').val();
@@ -67,7 +88,35 @@
                         var a = $('#sortSubtemaJawaban').val();
                         jawaban(a);
                     });
+
+                    $('#btn-save-theme').on('click', function() {
+                        const a = $('#form-theme').serialize();
+                        insertTema(a);
+                        console.log(a);
+                        $.ajax({
+                            type: "POST",
+                            url: "<?= base_url('Theme'); ?>",
+                            data: $('#form-theme').serialize(),
+                            success: function(response) {
+                                document.location.href = "<?= base_url('theme') ?>"
+                            }
+                        });
+                    });
                 });
+
+                function tema(a) {
+                    //alert(a);
+                    var xhttp;
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("tabeltema").innerHTML = this.responseText;
+
+                        }
+                    };
+                    xhttp.open("POST", "<?= base_url('theme/viewTableTema/'); ?>" + a, true);
+                    xhttp.send();
+                }
 
                 function subtema(a) {
                     // alert(a);
@@ -78,7 +127,7 @@
                             document.getElementById("tabelsubtema").innerHTML = this.responseText;
                         }
                     };
-                    xhttp.open("POST", "<?= base_url('theme/viewTable/'); ?>" + a, true);
+                    xhttp.open("POST", "<?= base_url('theme/viewTableSubtema/'); ?>" + a, true);
                     xhttp.send();
                 }
 
@@ -107,28 +156,6 @@
                     xhttp.send();
                     //alert(a);
                 }
-
-                function name(params) {
-
-                }
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (function() {
-                    'use strict';
-                    window.addEventListener('load', function() {
-                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                        var forms = document.getElementsByClassName('needs-validation');
-                        // Loop over them and prevent submission
-                        var validation = Array.prototype.filter.call(forms, function(form) {
-                            form.addEventListener('submit', function(event) {
-                                if (form.checkValidity() === false) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                                form.classList.add('was-validated');
-                            }, false);
-                        });
-                    }, false);
-                })();
             </script>
             </body>
 

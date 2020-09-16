@@ -19,7 +19,7 @@ class Theme extends CI_Controller
             $data['user'] = $this->db->get_where('tb_user', ['email' => $this->session->userdata('email')])->row_array();
             $data['title'] = 'Tema';
             $data['tingkat'] = $this->db->get('tb_tingkat')->result_array();
-            $data['tema'] = $this->db->query('SELECT id_tema, tingkat_id, nama_tingkat, nama_tema FROM tb_tema JOIN tb_tingkat ON tb_tema.tingkat_id = tb_tingkat.id_tingkat')->result_array();
+            $data['tema']['tema'] = $this->db->query('SELECT id_tema, tingkat_id, nama_tingkat, nama_tema FROM tb_tema JOIN tb_tingkat ON tb_tema.tingkat_id = tb_tingkat.id_tingkat')->result_array();
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
@@ -65,7 +65,7 @@ class Theme extends CI_Controller
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('tema/subtema', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('templates/footer', $data);
         } else {
             $data = [
                 'tema_id' => $this->input->post('nameTheme'),
@@ -94,7 +94,18 @@ class Theme extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Tema Berhasil di delete</div>');
         redirect('theme');
     }
-    public function viewTable($val)
+
+    public function viewTableTema($val)
+    {
+        if ($val == "all") {
+            $data['tema'] = $this->db->query('SELECT id_tema, tingkat_id, nama_tingkat, nama_tema FROM tb_tema JOIN tb_tingkat ON tb_tema.tingkat_id = tb_tingkat.id_tingkat')->result_array();
+        } else {
+            $data['tema'] = $this->db->query('SELECT id_tema, tingkat_id, nama_tingkat, nama_tema FROM tb_tema JOIN tb_tingkat ON tb_tema.tingkat_id = tb_tingkat.id_tingkat WHERE tingkat_id = ' . $val)->result_array();
+        }
+        $this->load->view('tema/table_tema', $data);
+    }
+
+    public function viewTableSubtema($val)
     {
         $data['tema'] = $this->db->get('tb_tema')->result_array();
         if ($val == "all") {
