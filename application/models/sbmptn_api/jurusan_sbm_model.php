@@ -1,8 +1,8 @@
 <?php
 
-class jurusan_api extends CI_Model
+class jurusan_sbm_model extends CI_Model
 {
-    public function getJurusan($jurusan = null)
+    public function getJurusansbm($jurusan = null)
     {
         if ($jurusan === null) {
             return $this->db->get('tb_jurusan_sbmptn')->result_array();

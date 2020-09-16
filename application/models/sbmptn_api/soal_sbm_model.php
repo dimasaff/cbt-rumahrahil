@@ -1,8 +1,8 @@
 <?php
 
-class soal_sbm_api extends CI_Model
+class soal_sbm_model extends CI_Model
 {
-    public function getSoal($soal = null)
+    public function getSoalsbm($soal = null)
     {
         if ($soal === null) {
             return $this->db->get('tb_soal_sbmptn')->result_array();
@@ -11,17 +11,17 @@ class soal_sbm_api extends CI_Model
         }
     }
 
-    public function deleteSoal($soal)
+    public function deleteSoalsbm($soal)
     {
         $this->db->delete('tb_soal_sbmptn', ['id_soal_sbmptn' => $soal]);
         return $this->db->affected_rows();
     }
-    public function createSoal($data)
+    public function createSoalsbm($data)
     {
         $this->db->insert('tb_soal_sbmptn', $data);
         return $this->db->affected_rows();
     }
-    public  function updateSoal($data, $soal)
+    public  function updateSoalsbm($data, $soal)
     {
         $this->db->update('tb_soal_sbmptn', $data, ['id_soal_sbmptn' => $soal]);
         return $this->db->affected_rows();

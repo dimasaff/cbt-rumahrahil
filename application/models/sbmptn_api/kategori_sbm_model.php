@@ -1,8 +1,8 @@
 <?php
 
-class kategori_api extends CI_Model
+class kategori_sbm_model extends CI_Model
 {
-    public function getKategori($kategori = null)
+    public function getKategorisbm($kategori = null)
     {
         if ($kategori === null) {
             return $this->db->get('tb_kategori_sbmptn')->result_array();
