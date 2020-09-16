@@ -91,14 +91,13 @@
 
                     $('#btn-save-theme').on('click', function() {
                         const a = $('#form-theme').serialize();
-                        insertTema(a);
                         console.log(a);
                         $.ajax({
                             type: "POST",
                             url: "<?= base_url('Theme'); ?>",
                             data: $('#form-theme').serialize(),
                             success: function(response) {
-                                document.location.href = "<?= base_url('theme') ?>"
+                                document.location.href = "<?= base_url('theme'); ?>"
                             }
                         });
                     });
