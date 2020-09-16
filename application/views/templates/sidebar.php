@@ -67,6 +67,42 @@
         </a>
     </li>
     <div class="sidebar-heading">
+        SBMPTN
+    </div>
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-book"></i>
+            <span>TKD</span></a>
+    </li>
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-book"></i>
+            <span>TPS</span></a>
+    </li>
+
+    <div class="sidebar-heading">
+        CPNS / KEDINASAN
+    </div>
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-book"></i>
+            <span>TWK</span></a>
+    </li>
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-book"></i>
+            <span>TIU</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-book"></i>
+            <span>TKP</span></a>
+    </li>
+
+    <div class="sidebar-heading">
         Data Nilai Siswa
     </div>
     <li class="nav-item">

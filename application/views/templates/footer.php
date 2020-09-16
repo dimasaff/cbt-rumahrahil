@@ -53,7 +53,64 @@
                         let fileName = $(this).val().split('\\').pop();
                         $(this).next('.custom-file-label').addClass("selected").html(fileName);
                     });
+
+                    //memancing combobox
+                    $('#sortTema').on('change', function() {
+                        var a = $('#sortTema').val();
+                        subtema(a);
+                    });
+                    $('#sortSubTema').on('change', function() {
+                        var a = $('#sortSubTema').val();
+                        soal(a);
+                    });
+                    $('#sortSubtemaJawaban').on('change', function() {
+                        var a = $('#sortSubtemaJawaban').val();
+                        jawaban(a);
+                    });
                 });
+
+                function subtema(a) {
+                    // alert(a);
+                    var xhttp;
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("tabelsubtema").innerHTML = this.responseText;
+                        }
+                    };
+                    xhttp.open("POST", "<?= base_url('theme/viewTable/'); ?>" + a, true);
+                    xhttp.send();
+                }
+
+                function soal(a) {
+                    var xhttp;
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("tabelsoal").innerHTML = this.responseText;
+                        }
+                    };
+                    xhttp.open("POST", "<?= base_url('soal/viewTableSoal/'); ?>" + a, true);
+                    xhttp.send();
+                    //alert(a);
+                }
+
+                function jawaban(a) {
+                    var xhttp;
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("tabeljawaban").innerHTML = this.responseText;
+                        }
+                    };
+                    xhttp.open("POST", "<?= base_url('soal/viewTableJawaban/'); ?>" + a, true);
+                    xhttp.send();
+                    //alert(a);
+                }
+
+                function name(params) {
+
+                }
                 // Example starter JavaScript for disabling form submissions if there are invalid fields
                 (function() {
                     'use strict';
