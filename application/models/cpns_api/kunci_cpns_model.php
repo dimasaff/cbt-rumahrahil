@@ -1,6 +1,6 @@
 <?php
 
-class kunci_api_cpns extends CI_Model
+class kunci_cpns_model extends CI_Model
 {
     public function getKuncicpns($kunci = null)
     {
