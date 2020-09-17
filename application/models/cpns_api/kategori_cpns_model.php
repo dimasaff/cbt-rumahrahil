@@ -1,6 +1,6 @@
 <?php
 
-class kategori_api_cpns extends CI_Model
+class kategori_cpns_model extends CI_Model
 {
     public function getKategoricpns($kategori = null)
     {
