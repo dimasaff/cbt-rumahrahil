@@ -86,18 +86,18 @@
         CPNS / KEDINASAN
     </div>
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?= base_url('cpns_crud/Soal_cpns'); ?>">
             <i class="fas fa-book"></i>
             <span>TWK</span></a>
     </li>
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?= base_url('cpns_crud/Soal_cpns'); ?>">
             <i class="fas fa-book"></i>
             <span>TIU</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?= base_url('cpns_crud/Soal_cpns'); ?>">
             <i class="fas fa-book"></i>
             <span>TKP</span></a>
     </li>
